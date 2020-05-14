@@ -1,0 +1,18 @@
+/* Main Site */
+
+.ui.container {
+    width: 800px !important;
+    padding-top: 2em;
+}
+
+#Quiz-Game {
+    margin: 2em 0px 0px 0px;
+}
+
+#Quiz-Game > ul {
+    list-style: none;
+}
+
+.Info {
+    text-transform: capitalize;
+}
