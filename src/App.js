@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Quiz from './components/QuizGame.js';
+import Dropdown from './components/DropDown.js';
 import axios from "axios";
-import './styles/stylesheet.css';
 
 class App extends Component {
   constructor(props) {
@@ -9,18 +9,29 @@ class App extends Component {
     this.state = {
       questions: [],
       answers: [],
-      correctAnswer: ''
+      correctAnswer: '',
+      dropdown: '',
+      type: ''
     }
   }
 
   handleQuestions() {
     this.setState(prevState => ({
-      questions: !prevState.questions
+      questions: !prevState.questions,
+      dropdown: '', type: ''
     }));
   }
 
+  getDropdown(value) {
+    this.setState({ dropdown: value })
+  }
+
+  getType(value) {
+    this.setState({ type: value })
+  }
+
   getQuestion() {
-    axios.get("https://opentdb.com/api.php?amount=1&type=multiple")
+    axios.get(`https://opentdb.com/api.php?amount=1&category=${this.state.dropdown}&type=${this.state.type}`)
       .then(res => {
         let response = res.data.results;
         let answers = [response[0].correct_answer].concat(...[response[0].incorrect_answers])
@@ -39,7 +50,8 @@ class App extends Component {
     return this.state.questions == "" ? (
       <div className="ui container center aligned animate__animated animate__fadeInDown">
         <div className="ui segment">
-          <h1 className="ui header">Quiz Game</h1>
+          <h1 className="ui header">QuizMe</h1>
+          <Dropdown getDropdown={this.getDropdown.bind(this)} getType={this.getType.bind(this)} />
           <div className="ui dividing header"></div>
           <button type="button" className="ui inverted primary button" onClick={(e) => this.getQuestion(e)}>Generate Question</button>
         </div>

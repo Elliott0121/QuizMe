@@ -6,6 +6,10 @@ export class QuizGame extends Component {
         super(props);
     }
 
+    componentDidUpdate() {
+        document.getElementById("Quiz-Game").className = "ui container center aligned animate__animated animate__zoomIn"
+    }
+
     render() {
         return this.props.questions.map((question, index) => (
             <div className="ui container center aligned animate__animated animate__zoomIn" key={index} id="Quiz-Game">

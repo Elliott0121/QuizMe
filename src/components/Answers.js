@@ -6,6 +6,7 @@ export class Answers extends Component {
     }
 
     componentDidUpdate() {
+        setTimeout(() => { document.getElementById("Quiz-Game").className="ui container center aligned" }, 1000)
         let buttons = document.getElementsByTagName("li");
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].className = "ui inverted orange button";
