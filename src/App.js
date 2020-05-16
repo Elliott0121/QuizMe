@@ -15,7 +15,7 @@ class App extends Component {
     }
   }
 
-  handleQuestions() {
+  exitQuiz() {
     this.setState(prevState => ({
       questions: !prevState.questions,
       dropdown: '', type: ''
@@ -63,7 +63,7 @@ class App extends Component {
           questions={this.state.questions}
           correctAnswer={this.state.correctAnswer}
           getQuestion={this.getQuestion.bind(this)}
-          handleState={this.handleQuestions.bind(this)}
+          goBack={this.exitQuiz.bind(this)}
         />
       </div>
 

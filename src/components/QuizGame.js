@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Answers from '../components/Answers.js';
+import { Popup } from 'semantic-ui-react';
 
 export class QuizGame extends Component {
     constructor(props) {
@@ -27,7 +28,12 @@ export class QuizGame extends Component {
                             getQuestion={this.props.getQuestion}
                         />
                     </ul>
-                    <p onClick={this.props.handleState}>Go Back</p>
+                    <Popup
+                        content={<button style={{ marginTop: '10px' }} type="button" className="ui tiny inverted red button" onClick={() => this.props.goBack()}>Quit</button>}
+                        header='Quit Quiz?' on='click' pinned position={"bottom center"}
+                        style={{ textAlign: 'center' }} className='animate__animated animate__fadeIn'
+                        trigger={<button type="button" className="ui inverted red button" >Go Back</button>}
+                    />
                 </div>
             </div>
         ))
