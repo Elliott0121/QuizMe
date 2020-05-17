@@ -5,14 +5,25 @@
     padding-top: 2em;
 }
 
+/* Quiz Game */
+
 #Quiz-Game {
     margin: 2em 0px 0px 0px;
 }
 
-#Quiz-Game > ul {
-    list-style: none;
-}
-
 .Info {
     text-transform: capitalize;
+}
+
+.ui[class*="two column"].grid > .column:not(.row) {
+    width: 40% !important;
+}
+
+.ui.stackable.centered.two.column.grid {
+    margin: 25px;
+}
+
+.ui.stackable.centered.two.column.grid > .button.column {
+    margin: 5px;
+    text-align: center;
 }

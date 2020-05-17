@@ -57,16 +57,13 @@ class App extends Component {
         </div>
       </div>
     ) :
-      <div className="ui container center aligned">
-        <Quiz
-          answers={this.state.answers}
-          questions={this.state.questions}
-          correctAnswer={this.state.correctAnswer}
-          getQuestion={this.getQuestion.bind(this)}
-          goBack={this.exitQuiz.bind(this)}
-        />
-      </div>
-
+      <Quiz
+        answers={this.state.answers}
+        questions={this.state.questions}
+        correctAnswer={this.state.correctAnswer}
+        getQuestion={this.getQuestion.bind(this)}
+        goBack={this.exitQuiz.bind(this)}
+      />
   }
 }
 

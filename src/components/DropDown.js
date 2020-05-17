@@ -24,12 +24,12 @@ export class DropDown extends Component {
                     { key: 22, text: 'Entertainment: Comics', value: 29, as: 'li' },
                     { key: 24, text: 'Entertainment: Japanese Anime & Manga', value: 31, as: 'li' },
                     { key: 25, text: 'Entertainment: Cartoon & Animations', value: 32, as: 'li' },
-                    <Dropdown.Divider key={27}/>,
+                    <Dropdown.Divider key={27} />,
                     { key: 10, text: 'Science & Nature', value: 17, as: 'li' },
                     { key: 11, text: 'Science: Computers', value: 18, as: 'li' },
                     { key: 12, text: 'Science: Mathematics', value: 19, as: 'li' },
                     { key: 23, text: 'Science: Gadgets', value: 30, as: 'li' },
-                    <Dropdown.Divider key={28}/>,
+                    <Dropdown.Divider key={28} />,
                     { key: 13, text: 'Mythology', value: 20, as: 'li' },
                     { key: 14, text: 'Sports', value: 21, as: 'li' },
                     { key: 15, text: 'Geography', value: 22, as: 'li' },
@@ -40,12 +40,11 @@ export class DropDown extends Component {
                     { key: 20, text: 'Animals', value: 27, as: 'li' },
                     { key: 21, text: 'Vehicles', value: 28, as: 'li' },
                 ]} as='ul' />
-                   <h5 className="ui header left aligned">Select Type</h5>
+                <h5 className="ui header left aligned">Select Type</h5>
                 <Dropdown fluid selection placeholder="Any Type" onChange={(e, { value }) => this.props.getType(value)} options={[
                     { key: 1, text: 'Random Type', value: '', icon: 'random' },
                     { key: 2, text: 'Multiple Choice', value: 'multiple' },
                     { key: 3, text: 'True / False', value: 'boolean' },
-                    <Dropdown.Divider key={4}/>,
                 ]} as='ul' />
             </div>
         )
