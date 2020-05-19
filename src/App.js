@@ -11,14 +11,15 @@ class App extends Component {
       answers: [],
       correctAnswer: '',
       dropdown: '',
-      type: ''
+      type: '',
+      rounds: 0
     }
   }
 
   exitQuiz() {
     this.setState(prevState => ({
       questions: !prevState.questions,
-      dropdown: '', type: ''
+      dropdown: '', type: '', rounds: 0
     }));
   }
 
@@ -47,13 +48,19 @@ class App extends Component {
   }
 
   render() {
+    let styleLocked = this.state.rounds == 0 ? "ui disabled inverted primary button" : "ui inverted primary button";
     return this.state.questions == "" ? (
       <div className="ui container center aligned animate__animated animate__fadeInDown">
         <div className="ui segment">
           <h1 className="ui header">QuizMe</h1>
           <Dropdown getDropdown={this.getDropdown.bind(this)} getType={this.getType.bind(this)} />
           <div className="ui dividing header"></div>
-          <button type="button" className="ui inverted primary button" onClick={(e) => this.getQuestion(e)}>Generate Question</button>
+          <button type="button" className="ui icon left inverted primary button" data-rounds={5} onClick={(e) => this.setState({ rounds: e.target.getAttribute('data-rounds') })}>
+            <i aria-hidden="true" className="angle right icon"></i>5 Rounds</button>
+          <button type="button" className="ui icon left inverted primary button" data-rounds={10} onClick={(e) => this.setState({ rounds: e.target.getAttribute('data-rounds') })}>
+            <i aria-hidden="true" className="angle double right icon"></i>10 Rounds</button>
+          <div className="ui dividing header"></div>
+          <button type="button" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
         </div>
       </div>
     ) :
@@ -64,6 +71,7 @@ class App extends Component {
           correctAnswer={this.state.correctAnswer}
           getQuestion={this.getQuestion.bind(this)}
           goBack={this.exitQuiz.bind(this)}
+          rounds={this.state.rounds}
         />
       </div>
 

@@ -5,14 +5,36 @@ import { Popup } from 'semantic-ui-react';
 export class QuizGame extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            index: 1
+        }
     }
 
     componentDidUpdate() {
-        document.getElementById("Quiz-Game").className = "ui container center aligned animate__animated animate__zoomIn"
-        setTimeout(() => { document.getElementById("Quiz-Game").className = "ui container center aligned" }, 1000)
+        document.getElementById("Quiz-Game").className = "ui container center aligned animate__animated animate__backInDown";
+        setTimeout(() => { document.getElementById("Quiz-Game").className = "ui container center aligned" }, 1000);
+        let buttons = document.getElementsByTagName("span")
+        document.getElementsByTagName("button")[0].className = "ui inverted red button"
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].className = "ui inverted orange button column";
+        }
+    }
+
+    updateRound(update) {
+        this.setState({ index: update })
+        if (this.state.index > this.props.rounds) {
+            console.log("Quiz Completed")
+            this.props.goBack()
+        } else {
+            this.props.getQuestion();
+            console.log(update)
+        }
     }
 
     render() {
+        let currentRound = this.props.rounds != 0 ?
+            React.createElement('p', { id: this.state.index, className: "ui disabled basic primary button" },
+                `Round ${this.state.index} / ${this.props.rounds}`) : ''
         return this.props.questions.map((question, index) => (
             <div className='ui container center aligned' key={index} id="Quiz-Game">
                 <div className="ui segment">
@@ -30,7 +52,8 @@ export class QuizGame extends Component {
                         <Answers
                             answers={this.props.answers.sort(() => Math.random() - 0.5)}
                             correctAnswer={this.props.correctAnswer}
-                            getQuestion={this.props.getQuestion}
+                            updateRound={this.updateRound.bind(this)}
+                            index={this.state.index}
                         />
                     </div>
                     <Popup
@@ -40,6 +63,7 @@ export class QuizGame extends Component {
                         trigger={<button type="button" className="ui inverted red button" >Go Back</button>}
                     />
                 </div>
+                {currentRound}
             </div>
         ))
     }
