@@ -16,9 +16,14 @@ export class QuizGame extends Component {
         return this.props.questions.map((question, index) => (
             <div className='ui container center aligned' key={index} id="Quiz-Game">
                 <div className="ui segment">
-                    <p><strong>{question.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}</strong></p>
-                    <div className="Info">
-                        <p>Category: {question.category}</p>
+                    <div id="container-image" className="ui segment">
+                        <img id="image" src="https://cdn.mos.cms.futurecdn.net/XFL6HquyTYfQH5L7ztttp3-650-80.jpg" className="ui fluid image" />
+                        <div id="jumbo">
+                            <p><strong>{question.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}</strong></p>
+                            <div className="Info">
+                                <p>Category: {question.category}</p>
+                            </div>
+                        </div>
                     </div>
                     <div className="ui dividing header"></div>
                     <div className="ui stackable centered two column grid">
