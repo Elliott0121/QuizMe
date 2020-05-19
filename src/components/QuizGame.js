@@ -33,7 +33,7 @@ export class QuizGame extends Component {
 
     render() {
         let currentRound = this.props.rounds != 0 ?
-            React.createElement('p', { id: this.state.index, className: "ui disabled basic primary button" },
+            React.createElement('p', { id: this.state.index, className: "ui disabled inverted orange button" },
                 `Round ${this.state.index} / ${this.props.rounds}`) : ''
         return this.props.questions.map((question, index) => (
             <div className='ui container center aligned' key={index} id="Quiz-Game">
