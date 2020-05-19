@@ -19,7 +19,6 @@ export class QuizGame extends Component {
                     <p><strong>{question.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}</strong></p>
                     <div className="Info">
                         <p>Category: {question.category}</p>
-                        <p className="Difficulty">Difficulty: {question.difficulty}</p>
                     </div>
                     <div className="ui dividing header"></div>
                     <div className="ui stackable centered two column grid">
