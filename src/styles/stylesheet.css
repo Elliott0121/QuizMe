@@ -42,10 +42,6 @@ body {
     padding: 0px;
 }
 
-#image {
-    opacity: 0.8;
-}
-
 #jumbo {
     top: 70%;
     z-index: 999;
@@ -55,9 +51,8 @@ body {
     text-align: center;
     position: absolute;
     color: white;
-    background-color: black;
     padding: 10px;
     border-radius: 25px;
     margin: 0px 40px;
-    opacity: 0.8;
+    margin-bottom: 10px;
 }
