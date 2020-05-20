@@ -10,6 +10,7 @@ export class QuizGame extends Component {
     componentDidUpdate() {
         document.getElementById("Quiz-Game").className = "ui container center aligned animate__animated animate__zoomIn";
         setTimeout(() => { document.getElementById("Quiz-Game").className = "ui container center aligned" }, 1000);
+        document.title = `QuizMe | ${this.props.index} - ${this.props.rounds}`
     }
 
     render() {
@@ -20,7 +21,9 @@ export class QuizGame extends Component {
             <div className='ui container center aligned' key={index} id="Quiz-Game">
                 <div className="ui segment">
                     <div id="container-image" className="ui segment">
-                        <img id="image" src="https://cdn.mos.cms.futurecdn.net/XFL6HquyTYfQH5L7ztttp3-650-80.jpg" className="ui fluid image" />
+                        <div id="placeholder">
+                            <img id="image" src="../public/media/quizme.png" className="ui fluid image" />
+                        </div>
                         <div id="jumbo">
                             <p><strong>{question.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}</strong></p>
                             <div className="Info">

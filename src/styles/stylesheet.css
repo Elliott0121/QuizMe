@@ -42,22 +42,22 @@ body {
     padding: 0px;
 }
 
-#image {
-    opacity: 0.8;
+#placeholder {
+    background-color: black;
+} 
+
+#placeholder > #image {
+    opacity: 0.3;
+    filter: blur(4px);
 }
 
 #jumbo {
-    top: 70%;
+    top: 40%;
     z-index: 999;
-    margin: 0 auto;
     left: 0;
-    right: 0;        
-    text-align: center;
+    right: 0;
     position: absolute;
     color: white;
-    background-color: black;
-    padding: 10px;
-    border-radius: 25px;
-    margin: 0px 40px;
-    opacity: 0.8;
+    font-size: 24px;
+    padding: 0px 15px 0px 15px;
 }
