@@ -12,14 +12,15 @@ class App extends Component {
       correctAnswer: '',
       dropdown: '',
       type: '',
-      rounds: 0
+      rounds: 0,
+      index: 0
     }
   }
 
   exitQuiz() {
     this.setState(prevState => ({
       questions: !prevState.questions,
-      dropdown: '', type: '', rounds: 0
+      dropdown: '', type: '', rounds: 0, index: 0
     }));
   }
 
@@ -29,6 +30,14 @@ class App extends Component {
 
   getType(value) {
     this.setState({ type: value })
+  }
+
+  updateRound() {
+    let index = this.state.index
+    this.setState({ index: index += 1 })
+    if (index > this.state.rounds) {
+      this.exitQuiz();
+    }
   }
 
   getQuestion() {
@@ -41,6 +50,7 @@ class App extends Component {
         this.setState({ correctAnswer: response[0].correct_answer })
         console.log(...this.state.questions);
         console.log(this.state.correctAnswer)
+        this.updateRound();
       })
       .catch(error => {
         console.log(error)
@@ -49,18 +59,22 @@ class App extends Component {
 
   render() {
     let styleLocked = this.state.rounds == 0 ? "ui disabled inverted primary button" : "ui inverted primary button";
+    let choices = this.state.rounds != 0 ?
+      React.createElement('p', { id: this.state.index, className: "ui blue pointing basic label animate__animated animate__fadeIn" },
+        <i aria-hidden="true" className="flag outline icon"></i>, `Rounds ${this.state.rounds}`) : ''
     return this.state.questions == "" ? (
       <div className="ui container center aligned animate__animated animate__fadeInDown">
         <div className="ui segment">
           <h1 className="ui header">QuizMe</h1>
           <Dropdown getDropdown={this.getDropdown.bind(this)} getType={this.getType.bind(this)} />
           <div className="ui dividing header"></div>
-          <button type="button" className="ui icon left inverted primary button" data-rounds={5} onClick={(e) => this.setState({ rounds: e.target.getAttribute('data-rounds') })}>
+          <button type="button" className="ui icon left inverted primary button" onClick={() => this.setState({ rounds: 5 })}>
             <i aria-hidden="true" className="angle right icon"></i>5 Rounds</button>
-          <button type="button" className="ui icon left inverted primary button" data-rounds={10} onClick={(e) => this.setState({ rounds: e.target.getAttribute('data-rounds') })}>
+          <button type="button" className="ui icon left inverted primary button" onClick={() => this.setState({ rounds: 10 })}>
             <i aria-hidden="true" className="angle double right icon"></i>10 Rounds</button>
           <div className="ui dividing header"></div>
-          <button type="button" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
+          <button type="button" id="start-quiz" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
+          {choices}
         </div>
       </div>
     ) :
@@ -72,6 +86,7 @@ class App extends Component {
           getQuestion={this.getQuestion.bind(this)}
           goBack={this.exitQuiz.bind(this)}
           rounds={this.state.rounds}
+          index={this.state.index}
         />
       </div>
 

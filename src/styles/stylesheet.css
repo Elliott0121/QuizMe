@@ -9,6 +9,11 @@ body {
     background-color: #27496d;
 }
 
+#start-quiz {
+    display: block;
+    margin: 0 auto;
+}
+
 /* Quiz Game */
 
 #Quiz-Game {

@@ -8,11 +8,16 @@ export class Answers extends Component {
         }
     }
 
+    componentDidUpdate() {
+        document.getElementsByTagName("button")[0].className = "ui inverted red button"
+        for (let i = 0; i < this.state.buttons.length; i++) {
+            this.state.buttons[i].className = "ui inverted orange button column";
+        }
+    }
+
     checkAnswer(event) {
-        let index = this.props.index;
         if (event.target.textContent == this.props.correctAnswer) {
             console.log(`Correct! | ${event.target.textContent}`);
-            index += 1;
             for (let i = 0; i < this.state.buttons.length; i++) {
                 if (this.state.buttons[i].className != 'ui disabled red button') {
                     this.state.buttons[i].className = "ui disabled red button column animate__animated animate__headShake"
@@ -20,7 +25,7 @@ export class Answers extends Component {
                 }
             }
             event.target.className = "ui disabled green button column animate__animated animate__heartBeat";
-            setTimeout(() => { this.props.updateRound(index) }, 3000);
+            setTimeout(() => { this.props.getQuestion() }, 3000);
 
         } else {
             console.log(`Wrong! | ${event.target.textContent}`);
