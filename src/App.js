@@ -18,6 +18,7 @@ class App extends Component {
   }
 
   exitQuiz() {
+    document.title = 'QuizMe';
     this.setState(prevState => ({
       questions: !prevState.questions,
       dropdown: '', type: '', rounds: 0, index: 0
