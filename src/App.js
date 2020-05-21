@@ -34,11 +34,12 @@ class App extends Component {
   }
 
   updateRound() {
-    let index = this.state.index
-    this.setState({ index: index += 1 })
-    if (index > this.state.rounds) {
-      this.exitQuiz();
+    let buttons = document.getElementsByTagName("span")
+    document.getElementsByTagName("button")[0].className = "ui inverted red button"
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].className = "ui inverted orange button column animate__animated animate__fadeIn"
     }
+    this.setState({ index: this.state.index += 1 })
   }
 
   getQuestion() {
@@ -58,10 +59,21 @@ class App extends Component {
       })
   }
 
+  componentDidUpdate() {
+    let quizElement = document.getElementById("Quiz-Game")
+    if (quizElement == null) {
+      return;
+    } else {
+      quizElement.className = "ui container center aligned animate__animated animate__zoomIn";
+      setTimeout(() => { quizElement.className = "ui container center aligned" }, 1000);
+      document.title = `QuizMe | ${this.state.index} - ${this.state.rounds}`;
+    }
+  }
+
   render() {
     let styleLocked = this.state.rounds == 0 ? "ui disabled inverted primary button" : "ui inverted primary button";
     let choices = this.state.rounds != 0 ?
-      React.createElement('p', { id: this.state.index, className: "ui blue pointing basic label animate__animated animate__fadeIn" },
+      React.createElement('p', { className: "ui blue pointing basic label animate__animated animate__fadeIn" },
         <i aria-hidden="true" className="flag outline icon"></i>, `Rounds ${this.state.rounds}`) : ''
     return this.state.questions == "" ? (
       <div className="ui container center aligned animate__animated animate__fadeInDown">
@@ -79,15 +91,16 @@ class App extends Component {
         </div>
       </div>
     ) :
-      <div className="ui container center aligned">
+      <div className="ui container center aligned" id="Quiz-Game">
         <Quiz
-          answers={this.state.answers}
+          answers={this.state.answers.sort(() => Math.random() - 0.5)}
           questions={this.state.questions}
           correctAnswer={this.state.correctAnswer}
           getQuestion={this.getQuestion.bind(this)}
           goBack={this.exitQuiz.bind(this)}
           rounds={this.state.rounds}
           index={this.state.index}
+          loading={this.state.loading}
         />
       </div>
 
