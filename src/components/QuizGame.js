@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Answers from '../components/Answers.js';
-import { Popup } from 'semantic-ui-react';
+import {Popup} from 'semantic-ui-react';
 
 export class QuizGame extends Component {
     constructor(props) {
@@ -12,9 +12,9 @@ export class QuizGame extends Component {
     }
 
     updateStyle() {
-        document.getElementById("Current-Score").className = "ui inverted yellow button animate__animated animate__fadeInDown";
+        document.getElementById("Current-Score").className = "ui disabled inverted yellow button animate__animated animate__fadeInDown";
         setTimeout(() => {
-            document.getElementById("Current-Score").className = "ui inverted yellow button animate__animated animate__fadeOut"
+            document.getElementById("Current-Score").className = "ui disabled inverted yellow button animate__animated animate__fadeOut"
         }, 1500);
     }
 
@@ -45,13 +45,13 @@ export class QuizGame extends Component {
                 <div className="ui segment">
                     <div id="container-image" className="ui segment">
                         <div id="placeholder">
-                            <img id="image" src="../public/media/quizme.png" className="ui fluid image" alt="Quiz Me background-image" />
+                            <img id="image" draggable="false" src="../public/media/quizme.png" className="ui fluid image" alt="Quiz Me background-image" />
                         </div>
                         <div id="jumbo">
                             <p><strong>{question.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}</strong></p>
                             <div className="Info">
                                 <p>Category: {question.category}</p>
-                                <p id="Current-Score" className="ui inverted yellow button">Current Score: {this.state.score}</p>
+                                <p id="Current-Score" className="ui disabled inverted yellow button">Current Score: {this.state.score}</p>
                             </div>
                         </div>
                     </div>
@@ -75,6 +75,18 @@ export class QuizGame extends Component {
                         style={{ textAlign: 'center' }} className='animate__animated animate__fadeIn'
                         trigger={<button type="button" className="ui inverted red button" >Go Back</button>}
                     />
+                <div id="floating-label" className="ui red floating label">
+                <Popup
+                    trigger={<i id="help" className="question circle outline big icon"></i>}
+                    content={<ol role="list" className="ui list">
+                    <li role="listitem">First Try = 20 points</li>
+                    <li role="listitem">Second Try = 15 points</li>
+                    <li role="listitem">Third Try = 10 points</li>
+                    <li role="listitem">Last Try = 5 points</li>
+                  </ol>}
+                    position='bottom left'
+                />
+                </div>
                 </div>
                 {currentRound}
             </div>

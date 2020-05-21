@@ -37,7 +37,7 @@ export class Answers extends Component {
 
     render() {
         return this.props.answers.map((answer, index) => (
-            <span key={index} type="button" className="ui inverted orange button column" onClick={(e) => this.checkAnswer(e)}>{answer}</span>
+            <span id="answer-btn" key={index} type="button" className="ui inverted orange button column" onClick={(e) => this.checkAnswer(e)}>{answer}</span>
         ))
     }
 }

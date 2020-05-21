@@ -59,3 +59,16 @@ body {
     font-size: 24px;
     padding: 0px 15px 0px 15px;
 }
+
+#answer-btn {
+    padding: 30px;
+    font-size: 20px;
+}
+
+#floating-label {
+    padding: 10px;
+}
+
+#help {
+    margin: 0px;
+}
