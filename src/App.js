@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import Quiz from './components/QuizGame.js';
 import Dropdown from './components/DropDown.js';
+import ScoreBoard from './components/ScoreBoard.js';
 import axios from "axios";
-import {Popup} from 'semantic-ui-react';
+import { Popup } from 'semantic-ui-react';
 
 class App extends Component {
   constructor(props) {
@@ -81,17 +82,17 @@ class App extends Component {
         <div className="ui segment">
           <h1 className="ui header">QuizMe</h1>
           <div id="floating-label" className="ui red floating label">
-                <Popup
-                    trigger={<i id="help" className="question circle outline big icon"></i>}
-                    content={<ol role="list" className="ui list">
-                    <li role="listitem">First Try = 20 points</li>
-                    <li role="listitem">Second Try = 15 points</li>
-                    <li role="listitem">Third Try = 10 points</li>
-                    <li role="listitem">Last Try = 5 points</li>
-                  </ol>}
-                    position='bottom left'
-                />
-            </div>
+            <Popup
+              trigger={<i id="help" className="question circle outline big icon"></i>}
+              content={<ol role="list" className="ui list">
+                <li role="listitem">First Try = 20 points</li>
+                <li role="listitem">Second Try = 15 points</li>
+                <li role="listitem">Third Try = 10 points</li>
+                <li role="listitem">Last Try = 5 points</li>
+              </ol>}
+              position='bottom left'
+            />
+          </div>
           <Dropdown getDropdown={this.getDropdown.bind(this)} getType={this.getType.bind(this)} />
           <div className="ui dividing header"></div>
           <button type="button" className="ui icon left inverted primary button" onClick={() => this.setState({ rounds: 5 })}>
@@ -102,6 +103,7 @@ class App extends Component {
           <button type="button" id="start-quiz" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
           {choices}
         </div>
+        <ScoreBoard />
       </div>
     ) :
       <div className="ui container center aligned" id="Quiz-Game">
@@ -113,7 +115,6 @@ class App extends Component {
           goBack={this.exitQuiz.bind(this)}
           rounds={this.state.rounds}
           index={this.state.index}
-          loading={this.state.loading}
         />
       </div>
   }

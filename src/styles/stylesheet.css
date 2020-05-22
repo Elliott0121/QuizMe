@@ -72,3 +72,27 @@ body {
 #help {
     margin: 0px;
 }
+
+#Current-Score {
+    animation-duration: 500ms;
+}
+
+#High-Score {
+    max-width: 60px;
+    margin: 0 auto;
+}
+
+#High-Score > .trophy.icon {
+    position: absolute;
+    z-index: 1;
+    margin: 11px 13px 13px 14px;
+}
+
+#High-Score > .certificate.icon {
+    animation-duration: 10s;
+    font-size: 52px;
+}
+
+#Score {
+    animation-iteration-count: 10;
+}
