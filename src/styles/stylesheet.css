@@ -96,3 +96,7 @@ body {
 #Score {
     animation-iteration-count: 10;
 }
+
+.ui.bottom.left.popup:before {
+    left: 6px;
+}
