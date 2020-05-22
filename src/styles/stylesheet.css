@@ -72,3 +72,7 @@ body {
 #help {
     margin: 0px;
 }
+
+.ui.bottom.left.popup:before {
+    left: 6px;
+}
