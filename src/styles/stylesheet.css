@@ -100,7 +100,7 @@ body {
 }
 
 .ui.bottom.right.popup:before {
-    right: 12px;
+    right: 11px;
 }
 
 #scoreboard-title {
@@ -113,4 +113,59 @@ body {
 
 #scoreboard-icon {
     float: right;
+}
+
+@media screen and (max-width: 767px) {
+    #quiz-game-container {
+        margin: 0px !important;
+    }
+    .ui.container {
+        margin: 0px !important;
+    }
+    #answer-btn {
+        margin: 5px !important;
+    }
+}
+
+@media screen and (max-width: 625px) {
+    #jumbo {
+        font-size: 16px;
+    }
+    #answer-btn {
+        margin: 5px !important;
+        font-size: 15px;
+    }
+    #Current-Score {
+        padding: 8px 13px !important;
+        font-size: 10px !important;
+    }
+}
+
+@media screen and (max-width: 510px) {
+    #jumbo {
+        top: 35%;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 364px) {
+    #option-btn-container {
+        display: block !important;
+        text-align: center !important;
+    }
+    #option-btn {
+        margin: 8px 0px !important;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 335px) {
+    #jumbo {
+        top: 20%;
+        font-size: 11px;
+    }
+    #answer-btn {
+        margin: 5px !important;
+        font-size: 12px;
+    }
 }
