@@ -79,12 +79,22 @@ export class QuizGame extends Component {
     render() {
         let currentRound = this.props.rounds != 0 && this.props.rounds != 'Speed' ?
             React.createElement('p', { id: this.props.index, className: "ui disabled inverted orange button" },
-                `Round ${this.props.index} / ${this.props.rounds}`) : React.createElement('div', {className: this.state.percent <= 0 ? "animate__animated animate__fadeOutUp" : ''}, <Progress value={this.state.percent} total={60} indicating />)
+                `Round ${this.props.index} / ${this.props.rounds}`) : React.createElement('div', { className: this.state.percent <= 0 ? "animate__animated animate__fadeOutUp" : '' }, <Progress value={this.state.percent} total={60} indicating />)
         return this.props.questions.map((question, index) => (
             <div className='ui container center aligned' key={index}>
                 <div className="ui segment">
                     <div id="container-image" className="ui segment">
                         <div id="placeholder">
+                            <Popup
+                                trigger={<i id="help" className="question circle outline big icon"></i>}
+                                content={<ol role="list" className="ui list">
+                                    <li role="listitem">First Try = 20 points</li>
+                                    <li role="listitem">Second Try = 15 points</li>
+                                    <li role="listitem">Third Try = 10 points</li>
+                                    <li role="listitem">Last Try = 5 points</li>
+                                </ol>}
+                                position='bottom right'
+                            />
                             <img id="image" draggable="false" src="../public/media/quizme.png" className="ui fluid image" alt="Quiz Me background-image" />
                         </div>
                         <div id="jumbo">
@@ -126,18 +136,6 @@ export class QuizGame extends Component {
                         style={{ textAlign: 'center' }} className='animate__animated animate__fadeIn'
                         trigger={<button type="button" className="ui inverted red button" >Go Back</button>}
                     />
-                    <div id="floating-label" className="ui red floating label">
-                        <Popup
-                            trigger={<i id="help" className="question circle outline big icon"></i>}
-                            content={<ol role="list" className="ui list">
-                                <li role="listitem">First Try = 20 points</li>
-                                <li role="listitem">Second Try = 15 points</li>
-                                <li role="listitem">Third Try = 10 points</li>
-                                <li role="listitem">Last Try = 5 points</li>
-                            </ol>}
-                            position='bottom left'
-                        />
-                    </div>
                 </div>
                 {currentRound}
             </div>

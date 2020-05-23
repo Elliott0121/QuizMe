@@ -70,7 +70,9 @@ body {
 }
 
 #help {
-    margin: 0px;
+    margin: 10px 10px 0px 0px;
+    color: white;
+    float: right;
 }
 
 #Current-Score {
@@ -97,8 +99,8 @@ body {
     animation-iteration-count: 10;
 }
 
-.ui.bottom.left.popup:before {
-    left: 6px;
+.ui.bottom.right.popup:before {
+    right: 12px;
 }
 
 #scoreboard-title {
@@ -107,4 +109,8 @@ body {
 
 #score {
     font-size: 15px;
+}
+
+#scoreboard-icon {
+    float: right;
 }
