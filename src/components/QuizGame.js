@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import Answers from '../components/Answers.js';
-import { Popup } from 'semantic-ui-react';
+import { Popup, Progress } from 'semantic-ui-react';
 
 export class QuizGame extends Component {
     constructor(props) {
         super(props);
         this.state = {
             score: 0,
-            highScore: 0,
-            status: ''
+            percent: 60,
+            status: '',
+            timer: 'timer'
         }
     }
 
@@ -21,6 +22,11 @@ export class QuizGame extends Component {
 
     componentDidMount() {
         this.updateStyle();
+        if (this.props.rounds == 'Speed') {
+            this.state.timer = setInterval(() => {
+                this.increment();
+            }, 1000);
+        }
     }
 
     saveScore() {
@@ -38,22 +44,42 @@ export class QuizGame extends Component {
     calculateScore(multiplier) {
         multiplier *= 10
         this.setState({ score: this.state.score += multiplier })
-        if (this.props.index < this.props.rounds) {
-            setTimeout(() => {
-                this.props.getQuestion();
-            }, 1500);
+        if (this.props.rounds != 'Speed') {
+            if (this.props.index < this.props.rounds) {
+                setTimeout(() => {
+                    this.props.getQuestion();
+                }, 1500);
+            } else {
+                this.setState({ status: 'done' });
+                this.saveScore();
+            }
         } else {
-            this.setState({ status: 'done' });
-            this.saveScore();
+            if (this.state.percent <= 0) {
+                this.setState({ status: 'done' });
+                this.saveScore();
+            } else {
+                setTimeout(() => {
+                    this.props.getQuestion();
+                }, 1500);
+            }
         }
-        console.log(this.state.score)
         this.updateStyle();
     }
 
+    increment() {
+        if (this.state.percent <= 0) {
+            clearInterval(this.state.timer);
+            this.setState({ status: 'done' });
+            this.saveScore();
+        } else {
+            this.setState({ percent: this.state.percent - 1 });
+        }
+    }
+
     render() {
-        let currentRound = this.props.rounds != 0 ?
+        let currentRound = this.props.rounds != 0 && this.props.rounds != 'Speed' ?
             React.createElement('p', { id: this.props.index, className: "ui disabled inverted orange button" },
-                `Round ${this.props.index} / ${this.props.rounds}`) : ''
+                `Round ${this.props.index} / ${this.props.rounds}`) : React.createElement('div', {className: this.state.percent <= 0 ? "animate__animated animate__fadeOutUp" : ''}, <Progress value={this.state.percent} total={60} indicating />)
         return this.props.questions.map((question, index) => (
             <div className='ui container center aligned' key={index}>
                 <div className="ui segment">
@@ -64,7 +90,7 @@ export class QuizGame extends Component {
                         <div id="jumbo">
                             <p><strong>{question.question.replace(/&quot;/g, '"').replace(/&#039;/g, "'")}</strong></p>
                             <div className="Info">
-                                <p>Category: {question.category}</p>
+                                <p>{question.category}</p>
                                 <p id="Current-Score" className="ui inverted yellow button">Current Score: {this.state.score}</p>
                             </div>
                         </div>

@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
 
-var points = 2;
-
 export class Answers extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            buttons: document.getElementsByTagName("span")
+            buttons: document.getElementsByTagName("span"),
+            points: 2
         }
-    }
-
-    componentDidUpdate() {
-        points = 2;
     }
 
     checkAnswer(event) {
@@ -25,14 +20,14 @@ export class Answers extends Component {
             }
             event.target.className = "ui disabled green button column animate__animated animate__heartBeat";
             setTimeout(() => {
-                this.props.calculateScore(points)
+                this.props.calculateScore(this.state.points), this.setState({ points: 2 })
             }, 3000);
         } else {
-            points -= 0.5;
+            this.setState({ points: this.state.points -= 0.5 });
             console.log(`Wrong! | ${event.target.textContent}`);
             event.target.className = "ui disabled red button column animate__animated animate__headShake";
         }
-        console.log(points)
+        console.log(this.state.points)
     }
 
     render() {
