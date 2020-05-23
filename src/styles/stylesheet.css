@@ -2,7 +2,7 @@
 
 .ui.container {
     width: 800px !important;
-    padding-top: 2em;
+    padding: 1em;
 }
 
 body {
@@ -124,6 +124,9 @@ body {
     }
     #answer-btn {
         margin: 5px !important;
+    }
+    .ui[class*="two column"].grid > .column:not(.row) {
+        width: 100% !important;
     }
 }
 

@@ -81,7 +81,7 @@ export class QuizGame extends Component {
             React.createElement('p', { id: this.props.index, className: "ui disabled inverted orange button" },
                 `Round ${this.props.index} / ${this.props.rounds}`) : React.createElement('div', { className: this.state.percent <= 0 ? "animate__animated animate__fadeOutUp" : '' }, <Progress value={this.state.percent} total={60} indicating />)
         return this.props.questions.map((question, index) => (
-            <div id="quiz-game-container" className='ui container center aligned' key={index}>
+            <div id="quiz-game-container" key={index}>
                 <div className="ui segment">
                     <div id="container-image" className="ui segment">
                         <div id="placeholder">
