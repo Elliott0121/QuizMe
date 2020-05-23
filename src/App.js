@@ -88,15 +88,17 @@ class App extends Component {
           <h1 className="ui header">QuizMe</h1>
           <Dropdown getDropdown={this.getDropdown.bind(this)} getType={this.getType.bind(this)} />
           <div className="ui dividing header"></div>
-          <button type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 5 })}>
-            <i aria-hidden="true" className="angle right icon"></i>5 Rounds</button>
-          <button type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 10 })}>
-            <i aria-hidden="true" className="angle double right icon"></i>10 Rounds</button>
-          <button type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 'Speed' })}>
-            <i aria-hidden="true" className="clock outline icon"></i> Speed Round</button>
-          <div className="ui dividing header"></div>
-          <button type="button" id="start-quiz" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
-          {choices}
+          <div id="option-btn-container">
+            <button id="option-btn" type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 5 })}>
+              <i aria-hidden="true" className="angle right icon"></i>5 Rounds</button>
+            <button id="option-btn" type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 10 })}>
+              <i aria-hidden="true" className="angle double right icon"></i>10 Rounds</button>
+            <button id="option-btn" type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 'Speed' })}>
+              <i aria-hidden="true" className="clock outline icon"></i> Speed Round</button>
+            <div className="ui dividing header"></div>
+            <button type="button" id="start-quiz" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
+            {choices}
+          </div>
         </div>
         <ScoreBoard />
       </div>

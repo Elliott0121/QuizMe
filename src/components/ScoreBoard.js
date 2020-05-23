@@ -24,7 +24,7 @@ export class ScoreBoard extends Component {
                                 <table className="ui celled inverted selectable table">
                                     <thead className="">
                                         <tr className="">
-                                            <th className="">Rounds<i id="scoreboard-icon" aria-hidden="true" className="hourglass half icon" ></i></th>
+                                            <th className="">Rounds<i id="scoreboard-icon" aria-hidden="true" className="flag outline icon" ></i></th>
                                             <th className="">Score<i id="scoreboard-icon" aria-hidden="true" className="trophy yellow icon" ></i></th>
                                             <th className="">Date<i id="scoreboard-icon" aria-hidden="true" className="calendar alternate outline icon" ></i></th>
                                         </tr>
