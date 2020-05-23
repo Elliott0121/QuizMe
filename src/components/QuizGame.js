@@ -74,7 +74,7 @@ export class QuizGame extends Component {
                         {this.state.status == 'done' ?
                             <div id="results" className="ui raised segment animate__animated animate__fadeInDown">
                                 {localStorage.getItem(`High_Score_${this.props.rounds}`) == null || JSON.parse(localStorage.getItem(`High_Score_${this.props.rounds}`))["High_Score"] < this.state.score ?
-                                    <div class="ui huge icon">
+                                    <div className="ui huge icon">
                                         <div id="High-Score">
                                             <i aria-hidden="true" className="trophy big yellow icon"></i>
                                             <i aria-hidden="true" className="certificate big loading large red icon"></i>

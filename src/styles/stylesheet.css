@@ -100,3 +100,11 @@ body {
 .ui.bottom.left.popup:before {
     left: 6px;
 }
+
+#scoreboard-title {
+    font-size: 20px;
+}
+
+#score {
+    font-size: 15px;
+}
