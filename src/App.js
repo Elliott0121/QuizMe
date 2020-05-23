@@ -12,8 +12,8 @@ class App extends Component {
       questions: [],
       answers: [],
       correctAnswer: '',
-      dropdown: '',
-      type: '',
+      dropdown: { value: '', category: '' },
+      type: { value: '', type: '' },
       rounds: 0,
       index: 0
     }
@@ -23,16 +23,17 @@ class App extends Component {
     document.title = 'QuizMe';
     this.setState(prevState => ({
       questions: !prevState.questions,
-      dropdown: '', type: '', rounds: 0, index: 0
+      dropdown: { value: '', category: '' }, type: { value: '', type: '' },
+      rounds: 0, index: 0
     }));
   }
 
-  getDropdown(value) {
-    this.setState({ dropdown: value })
+  getDropdown(value, text) {
+    this.setState({ dropdown: { value: value, category: text } })
   }
 
-  getType(value) {
-    this.setState({ type: value })
+  getType(value, text) {
+    this.setState({ type: { value: value, type: text } })
   }
 
   updateRound() {
@@ -45,7 +46,7 @@ class App extends Component {
   }
 
   getQuestion() {
-    axios.get(`https://opentdb.com/api.php?amount=1&category=${this.state.dropdown}&type=${this.state.type}`)
+    axios.get(`https://opentdb.com/api.php?amount=1&category=${this.state.dropdown.value}&type=${this.state.type.value}`)
       .then(res => {
         let response = res.data.results;
         let answers = [response[0].correct_answer].concat(...[response[0].incorrect_answers])
@@ -68,37 +69,31 @@ class App extends Component {
     } else {
       quizElement.className = "ui container center aligned animate__animated animate__zoomIn";
       setTimeout(() => { quizElement.className = "ui container center aligned" }, 1000);
-      document.title = `QuizMe | ${this.state.index} - ${this.state.rounds}`;
+      document.title =  this.state.rounds != 'Speed' ? `QuizMe | ${this.state.index} - ${this.state.rounds}` : 'QuizMe | Speed';
     }
   }
 
   render() {
-    let styleLocked = this.state.rounds == 0 ? "ui disabled inverted primary button" : "ui inverted primary button";
+    let styleLocked = this.state.rounds == 0 ? "ui disabled inverted orange button" : "ui inverted orange button";
     let choices = this.state.rounds != 0 ?
-      React.createElement('p', { className: "ui blue pointing basic label animate__animated animate__fadeIn" },
-        <i aria-hidden="true" className="flag outline icon"></i>, `Rounds ${this.state.rounds}`) : ''
+      React.createElement('p', { className: "ui orange pointing basic label animate__animated animate__fadeIn" },
+        <div id="Quiz-Settings" style={{ display: 'grid' }}>
+          <a className="ui label basic button"><i aria-hidden="true" className={this.state.rounds != 'Speed' ? "flag outline icon" : 'clock outline icon'}></i>{this.state.rounds != 'Speed' ? `${this.state.rounds} Rounds` : 'Speed Round'}</a>
+          <a className="ui label basic button"><i aria-hidden="true" className="tag icon"></i>{this.state.dropdown.category == '' ? 'Category: Random Category' : `Category: ${this.state.dropdown.category}`}</a>
+          <a className="ui label basic button"><i aria-hidden="true" className="clone icon"></i>{this.state.type.type == '' ? 'Type: Random Type' : `Type: ${this.state.type.type}`}</a>
+        </div>) : ''
     return this.state.questions == "" ? (
       <div className="ui container center aligned animate__animated animate__fadeInDown">
         <div className="ui segment">
           <h1 className="ui header">QuizMe</h1>
-          <div id="floating-label" className="ui red floating label">
-            <Popup
-              trigger={<i id="help" className="question circle outline big icon"></i>}
-              content={<ol role="list" className="ui list">
-                <li role="listitem">First Try = 20 points</li>
-                <li role="listitem">Second Try = 15 points</li>
-                <li role="listitem">Third Try = 10 points</li>
-                <li role="listitem">Last Try = 5 points</li>
-              </ol>}
-              position='bottom left'
-            />
-          </div>
           <Dropdown getDropdown={this.getDropdown.bind(this)} getType={this.getType.bind(this)} />
           <div className="ui dividing header"></div>
-          <button type="button" className="ui icon left inverted primary button" onClick={() => this.setState({ rounds: 5 })}>
+          <button type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 5 })}>
             <i aria-hidden="true" className="angle right icon"></i>5 Rounds</button>
-          <button type="button" className="ui icon left inverted primary button" onClick={() => this.setState({ rounds: 10 })}>
+          <button type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 10 })}>
             <i aria-hidden="true" className="angle double right icon"></i>10 Rounds</button>
+          <button type="button" className="ui icon left inverted orange button" onClick={() => this.setState({ rounds: 'Speed' })}>
+            <i aria-hidden="true" className="clock outline icon"></i> Speed Round</button>
           <div className="ui dividing header"></div>
           <button type="button" id="start-quiz" className={styleLocked} onClick={(e) => this.getQuestion(e)}>Generate Question</button>
           {choices}

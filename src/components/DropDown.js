@@ -10,7 +10,7 @@ export class DropDown extends Component {
         return (
             <div id="dropdown-menu">
                 <h5 className="ui header left aligned">Select Category</h5>
-                <Dropdown fluid selection placeholder="Any Category" onChange={(e, { value }) => this.props.getDropdown(value)} options={[
+                <Dropdown fluid selection placeholder="Any Category" onChange={(e, { value }) => this.props.getDropdown(value, e.target.textContent)} options={[
                     { key: 1, text: 'Random Category', value: '', icon: 'random' },
                     { key: 2, text: 'General Knowledge', value: 9 },
                     <Dropdown.Divider key={26} />,
@@ -41,7 +41,7 @@ export class DropDown extends Component {
                     { key: 21, text: 'Vehicles', value: 28, as: 'li' },
                 ]} as='ul' />
                 <h5 className="ui header left aligned">Select Type</h5>
-                <Dropdown fluid selection placeholder="Any Type" onChange={(e, { value }) => this.props.getType(value)} options={[
+                <Dropdown fluid selection placeholder="Any Type" onChange={(e, { value }) => this.props.getType(value, e.target.textContent)} options={[
                     { key: 1, text: 'Random Type', value: '', icon: 'random' },
                     { key: 2, text: 'Multiple Choice', value: 'multiple' },
                     { key: 3, text: 'True / False', value: 'boolean' },
