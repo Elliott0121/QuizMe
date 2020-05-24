@@ -24,12 +24,13 @@ export class QuizGame extends Component {
         this.updateStyle();
         if (this.props.rounds == 'Speed') {
             this.state.timer = setInterval(() => {
-                this.increment();
+                this.progressBar();
             }, 1000);
         }
     }
 
     saveScore() {
+        // Saves new high score to localstorage and the type of match and date included.
         if (localStorage.getItem(`High_Score_${this.props.rounds}`) == null || JSON.parse(localStorage.getItem(`High_Score_${this.props.rounds}`))["High_Score"] < this.state.score) {
             let d = new Date();
             let newEntry = {
@@ -42,6 +43,7 @@ export class QuizGame extends Component {
     }
 
     calculateScore(multiplier) {
+        // Calculates the current score and saves it temporarily in component state.
         multiplier *= 10
         this.setState({ score: this.state.score += multiplier })
         if (this.props.rounds != 'Speed') {
@@ -66,7 +68,8 @@ export class QuizGame extends Component {
         this.updateStyle();
     }
 
-    increment() {
+    progressBar() {
+        // Sets countsdown and ends the match until the timer reaches 0.
         if (this.state.percent <= 0) {
             clearInterval(this.state.timer);
             this.setState({ status: 'done' });

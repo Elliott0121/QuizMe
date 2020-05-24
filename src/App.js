@@ -46,6 +46,7 @@ class App extends Component {
   }
 
   getQuestion() {
+    // Generates one question based on category & type choice.
     axios.get(`https://opentdb.com/api.php?amount=1&category=${this.state.dropdown.value}&type=${this.state.type.value}`)
       .then(res => {
         let response = res.data.results;
@@ -53,8 +54,6 @@ class App extends Component {
         this.setState({ questions: response });
         this.setState({ answers: answers });
         this.setState({ correctAnswer: response[0].correct_answer })
-        console.log(...this.state.questions);
-        console.log(this.state.correctAnswer)
         this.updateRound();
       })
       .catch(error => {

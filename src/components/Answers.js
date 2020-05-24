@@ -10,8 +10,9 @@ export class Answers extends Component {
     }
 
     checkAnswer(event) {
+        // Checks if the answer is correct or wrong depending on user input.
+        // Points are sent to calculateScore after correct answer is given.
         if (event.target.textContent == this.props.correctAnswer) {
-            console.log(`Correct! | ${event.target.textContent}`);
             for (let i = 0; i < this.state.buttons.length; i++) {
                 if (this.state.buttons[i].className != 'ui disabled red button') {
                     this.state.buttons[i].className = "ui disabled red button column animate__animated animate__headShake"
@@ -24,10 +25,8 @@ export class Answers extends Component {
             }, 3000);
         } else {
             this.setState({ points: this.state.points -= 0.5 });
-            console.log(`Wrong! | ${event.target.textContent}`);
             event.target.className = "ui disabled red button column animate__animated animate__headShake";
         }
-        console.log(this.state.points)
     }
 
     render() {
