@@ -17,7 +17,7 @@ export class ScoreBoard extends Component {
                     <h1 className="ui header">Scoreboard</h1>
                 </div>
                 <div className="ui divider"></div>
-                {array == '' ? <h2 class="ui header center aligned">No high-scores saved. Play a game to receive a high-score!</h2> :
+                {this.state.round5 == null && this.state.round10 == null && this.state.roundSpeed == null ? <h2 class="ui header center aligned">No high-scores saved. Play a game to receive a high-score!</h2> :
                     <div id="Scoreboard">
                         <div style={{ textAlign: 'left' }}>
                             <div id="scoreboard-title">
